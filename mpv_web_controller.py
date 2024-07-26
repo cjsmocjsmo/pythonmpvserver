@@ -50,7 +50,7 @@ def make_app():
     ])
 
 if __name__ == "__main__":
-    Popen(["mpv", "--input-ipc-server=/tmp/mpvsocket", "--idle", "--fs"])
+    Popen(["mpv", "--input-ipc-server=/tmp/mpvsocket", "--fs", "--idle"])
     app = make_app()
     app.listen(9999)
     print("Server started at http://localhost:9999")
