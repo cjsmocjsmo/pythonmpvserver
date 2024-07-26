@@ -52,6 +52,6 @@ def make_app():
 if __name__ == "__main__":
     Popen(["mpv", "--input-ipc-server=/tmp/mpvsocket", "--idle", "--fs"])
     app = make_app()
-    app.listen(8888)
-    print("Server started at http://localhost:8888")
+    app.listen(9999)
+    print("Server started at http://localhost:9999")
     tornado.ioloop.IOLoop.current().start()
