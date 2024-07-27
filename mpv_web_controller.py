@@ -4,6 +4,10 @@ import json
 from subprocess import Popen
 import sqlite3
 
+class TestHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+
 class AddHandler(tornado.web.RequestHandler):
     def get(self):
         mediaid = self.get_argument("mediaid", None)
@@ -34,17 +38,22 @@ class CommandHandler(tornado.web.RequestHandler):
     def handle_command(self, command, mediaid):
         if command == "play":
             Popen(["mpvctl", "play"])
+            return "Playing media..."
         elif command == "pause":
             Popen(["mpvctl", "pause"])
+            return "Media paused."
         elif command == "next":
             Popen(["mpvctl", "next"])
+            return "Playing next media..."
         elif command == "prev":
             Popen(["mpvctl", "prev"])
+            return "Playing previous media..."
         else:
             return "Unknown command."
 
 def make_app():
     return tornado.web.Application([
+        (r"/test", TestHandler),
         (r"/add/mediaid", AddHandler)
         (r"/command", CommandHandler),
     ])
